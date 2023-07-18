@@ -26,21 +26,22 @@ if __name__ == "__main__":
     quickstart_web = "https://raw.githubusercontent.com/neurorishika/rpy-template/main/utils/quickstart.py"
 
     print("Downloading latest build.py and quickstart.py into utils folder...")
-    os.system("curl {} -o {}/utils/build.py".format(build_web, package_name))
-    os.system("curl {} -o {}/utils/quickstart.py".format(quickstart_web, package_name))
+    os.system("curl {} -o utils/build.py".format(build_web))
+    os.system("curl {} -o utils/quickstart.py".format(quickstart_web))
+    print("Download complete.")
 
     # download latest pyproject.toml into package folder
-    poetry_lock_web = "https://raw.githubusercontent.com/neurorishika/rpy-template/main/pyproject.toml"
+    pyproject_web = "https://raw.githubusercontent.com/neurorishika/rpy-template/main/pyproject.toml"
 
     print("Downloading latest pyproject.toml into package folder...")
-    os.system("curl {} -o {}/pyproject.toml.tmp".format(poetry_lock_web, package_name))
+    os.system("curl {} -o pyproject.toml.tmp".format(pyproject_web))
     print("Download complete.")
 
     # go through pyproject.toml.tmp and:
     # 1. find all dependencies that are in the template but not in the current package
     # 2. add those dependencies to the current package
 
-    with open("{}/pyproject.toml.tmp".format(package_name), "r") as f:
+    with open("pyproject.toml.tmp", "r") as f:
         lines_tmp = f.readlines()
     
     dependencies_tmp = []
@@ -56,7 +57,7 @@ if __name__ == "__main__":
             dependencies_tmp.append(line.split("=")[0].strip())
             full_dependencies_tmp.append(line)
     
-    with open("{}/pyproject.toml.tmp".format(package_name), "r") as f:
+    with open("pyproject.toml.tmp", "r") as f:
         lines = f.readlines()
 
     dependencies = []
@@ -78,7 +79,7 @@ if __name__ == "__main__":
             full_dependencies_to_add.append(full_dependencies_tmp[i])
     
     start = False
-    with open("{}/pyproject.toml".format(package_name), "w") as f:
+    with open("pyproject.toml", "w") as f:
         for line in lines:
             if line == "[tool.poetry.dependencies]\n":
                 start = True 
@@ -94,7 +95,7 @@ if __name__ == "__main__":
                 f.write(line)
 
     # remove pyproject.toml.tmp
-    os.system("rm {}/pyproject.toml.tmp".format(package_name))
+    os.system("rm pyproject.toml.tmp")
 
     # run poetry lock
     print("Running poetry lock...")
