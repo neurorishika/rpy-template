@@ -41,7 +41,7 @@ poetry run python utils/build.py
 The project is organized as follows:
 
 ```
-<repo-name(default:rpytemplate)>/
+<repo-name(default:rpy-template)>/
 ├── <package-name(default:rpytemplate)>/ - Python package (save all reusable code here using appropriate subdirectories; tracked by git)
 │   ├── __init__.py
 │   ├── rdp_client.py - for Rishika's Data Protection (RDP) Standard

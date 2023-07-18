@@ -10,13 +10,28 @@ if __name__ == "__main__":
 
     # verify that the project name is valid
     if not project_name.isidentifier():
-        # clean up the project name
-        project_name = project_name.replace("-", "_").replace(" ", "_")
         # remove any non-alphanumeric characters
         project_name = "".join([c for c in project_name if c.isalnum()])
         # add an underscore if the project name starts with a number
         if project_name[0].isnumeric():
             project_name = "_" + project_name
+    
+    # ask user to confirm project name
+    while True:
+        confirm = input("Project name will be {}. Proceed? (y/n) ".format(project_name))
+        if confirm.lower() == "y":
+            break
+        elif confirm.lower() == "n":
+            # ask user to enter a new project name
+            while True:
+                project_name = input("Please enter a new project name: ")
+                if project_name.isidentifier():
+                    break
+                else:
+                    print("Invalid project name. Please enter a valid project name.")
+            break
+        else:
+            print("Invalid input. Please enter 'y' or 'n'.")
       
     # change rpytemplate to the project name
     print("Setting project name to {}...".format(project_name),end="")
@@ -35,7 +50,7 @@ if __name__ == "__main__":
         f.write(os.getcwd())
     print("done.")
 
-    rdp_client_web = "https://raw.githubusercontent.com/neurorishika/rdp-library/main/rdp_client.py"
+    rdp_client_web = "https://raw.githubusercontent.com/neurorishika/rdp-standard/main/rdp_client.py"
 
     # download latest rdp_client.py into package folder
     print("Downloading latest rdp_client.py into package folder...")
