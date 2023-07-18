@@ -70,6 +70,9 @@ The project is organized as follows:
 │   ├── build.py - build package and setup __init__.py for package with lazy imports
 │   ├── quickstart.py - quickstart script to setup project
 │   └── ...
+├── scripts/ - scripts directory (tracked by git)
+│   ├── .gitkeep
+│   └── ...
 ├── tests/ - tests directory (tracked by git)
 │   ├── __init__.py
 │   └── ...
