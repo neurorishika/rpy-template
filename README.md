@@ -1,8 +1,8 @@
-# Rishika Python Project Template
+# Rishika's Template for Python Projects
 
-This is a [Poetry](https://python-poetry.org/)-enabled template for Python projects for use by (Rishika Mohanta)[https://neurorishika.github.io].
+This is a [Poetry](https://python-poetry.org/)-enabled template for Python projects for use by [Rishika Mohanta](https://neurorishika.github.io).
 
-Default settings are for Python 3.9 and above and the following packages are included:
+Default settings are for Python 3.9 and above and the following packages (and dependencies) are included:
 - numpy
 - pandas 
 - matplotlib
@@ -14,6 +14,8 @@ Default settings are for Python 3.9 and above and the following packages are inc
 - mkinit
 - cryptography
 - lazy-loader
+- split-file-reader
+- statannotations
 
 
 ## Installation
@@ -23,7 +25,7 @@ Create a new project using this template on GitHub and clone it locally. Then, r
 ```
 cd <project directory>
 python utils/quickstart.py
-poetry install
+poetry utils/build.py
 ```
 
 ## Update & Build Packages and Setup __init__.py for package with lazy imports
@@ -33,3 +35,58 @@ To update the packages and build the package, followed by setting up the __init_
 ```
 poetry run python utils/build.py
 ```
+
+## Organization
+
+The project is organized as follows:
+
+```
+<repo-name(default:rpytemplate)>/
+├── <package-name(default:rpytemplate)>/ - Python package (save all reusable code here using appropriate subdirectories; tracked by git)
+│   ├── __init__.py
+│   ├── rdp_client.py - for Rishika's Data Protection (RDP) Standard
+│   ├── module1.py
+│   ├── <subdirectory1>
+│   │   ├── __init__.py
+│   │   ├── <module1.1>.py
+│   │   └── ...
+│   ├── <subdirectory2>
+│   │   ├── __init__.py
+│   │   ├── <module2.1>.py
+│   │   └── ...
+│   └── ...
+├── data/ - data directory (partially tracked by git)
+│   ├── <datafolder1>/  - data folder (not tracked by git)
+│   │   └── ...
+│   ├── datafolder.ezip - encrypted data zip file (tracked by git)
+│   └── ...
+├── analysis/ - analysis directory (tracked by git)
+│   ├── ...
+│   └── .gitkeep
+├── processed_data/ - processed data directory (tracked by git)
+│   ├── ... (make sure to not save any raw data or files larger than 100 MB here)
+│   └── .gitkeep
+├── utils/ - utilities directory for useful scripts (tracked by git)
+│   ├── build.py - build package and setup __init__.py for package with lazy imports
+│   ├── quickstart.py - quickstart script to setup project
+│   └── ...
+├── tests/ - tests directory (tracked by git)
+│   ├── __init__.py
+│   └── ...
+├── .gitignore - gitignore file
+├── director.path - file containing path to the repo directory
+├── poetry.lock - poetry lock file
+├── pyproject.toml - poetry project file
+└── README.md - README file
+```
+
+
+
+
+
+
+
+
+
+
+

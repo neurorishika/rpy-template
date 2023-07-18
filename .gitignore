@@ -160,3 +160,5 @@ temp/
 **/data/*
 # unprotected zip files anywhere in the project directory and subfolders
 **/*.zip
+# directorypaths
+directory.path
