@@ -6,7 +6,7 @@ if __name__ == "__main__":
     print("==============================")
 
     # get the current directory name to use as the project name
-    project_name = os.path.basename(os.getcwd())
+    project_name = os.path.basename(os.getcwd()).lower()
 
     # verify that the project name is valid
     if not project_name.isidentifier():
@@ -24,8 +24,10 @@ if __name__ == "__main__":
         elif confirm.lower() == "n":
             # ask user to enter a new project name
             while True:
-                project_name = input("Please enter a new project name: ")
+                project_name = input("Please enter a new project name (all lowercase, no spaces): ")
                 if project_name.isidentifier():
+                    project_name = project_name.lower()
+                    project_name = "".join([c for c in project_name if c.isalnum()])
                     break
                 else:
                     print("Invalid project name. Please enter a valid project name.")
@@ -49,13 +51,6 @@ if __name__ == "__main__":
     with open("directory.path", "w") as f:
         f.write(os.getcwd())
     print("done.")
-
-    rdp_client_web = "https://raw.githubusercontent.com/neurorishika/rdp-standard/main/rdp_client.py"
-
-    # download latest rdp_client.py into package folder
-    print("Downloading latest rdp_client.py into package folder...")
-    os.system("curl {} -o {}/rdp_client.py".format(rdp_client_web, project_name))
-    print("Download complete.")
     
     print("Project {} created! Please run 'poetry run python utils/build.py' to finish installation.".format(project_name))
     

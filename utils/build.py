@@ -1,6 +1,7 @@
 # update poetry and rerun mkinit
 import os
 from subprocess import call
+import datetime
 
 print("STARTING BUILD PROCESS")
 print("======================")
@@ -25,6 +26,18 @@ print("done.")
 # install package
 print("Installing all dependencies and package...")
 call("poetry install", shell=True)
+
+# update license year
+print("Updating license...")
+with open("LICENSE", "r") as f:
+    lines = f.readlines()
+for line in lines:
+    if "Copyright" in line:
+        line = "Copyright (c) "+datetime.datetime.now().strftime("%Y")+", Rishika Mohanta\n"
+with open("LICENSE", "w") as f:
+    for line in lines:
+        f.write(line)
+print("done.")
 
 print("BUILD COMPLETE")
 
