@@ -2,6 +2,14 @@
 
 This is a [Poetry](https://python-poetry.org/)-enabled template for Python projects for use by [Rishika Mohanta](https://neurorishika.github.io).
 
+Make sure in-project virtual environments are enabled for poetry by running the following command:
+
+```
+poetry config virtualenvs.in-project true
+```
+
+Expected IDE: [Visual Studio Code](https://code.visualstudio.com/)
+
 Default settings are for Python 3.9 and above and the following packages (and dependencies) are included:
 - numpy
 - pandas 
@@ -16,6 +24,8 @@ Default settings are for Python 3.9 and above and the following packages (and de
 - lazy-loader
 - split-file-reader
 - statannotations
+- joblib
+- tqdm
 
 
 ## Installation
@@ -25,6 +35,7 @@ Create a new project using this template on GitHub and clone it locally. Then, r
 ```
 cd <project directory>
 python utils/quickstart.py
+python utils/update.py
 poetry utils/build.py
 ```
 
@@ -33,6 +44,7 @@ poetry utils/build.py
 To update the packages and build the package, followed by setting up the __init__.py file for the package with lazy imports, run the following command:
 
 ```
+poetry run python utils/update.py
 poetry run python utils/build.py
 ```
 
