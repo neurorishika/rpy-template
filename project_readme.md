@@ -1,4 +1,4 @@
-# rpytemplate
+# RPY
 
 <!-- badges: start -->
 <!-- badges: end -->

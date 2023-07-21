@@ -37,6 +37,10 @@ if __name__ == "__main__":
             package_name = line.split("=")[1].strip().replace('"', '')
     print("Package name: {}".format(package_name))
 
+    dir_name = os.path.basename(os.getcwd())
+
+    print("Directory name: {}".format(dir_name))
+
     print()
 
     # download latest rdp_client.py into package folder
@@ -211,8 +215,13 @@ if __name__ == "__main__":
         for line in lines:
             if line.startswith("Latest Build Date:"):
                 f.write("Latest Build Date: {}\n".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+            elif "RPY" in line:
+                f.write(line.replace("RPY", dir_name))
+            elif "rpytemplate" in line:
+                f.write(line.replace("rpytemplate", package_name))
             else:
                 f.write(line)
+            
     
     # replace the tree in README.md with the latest tree
     print("Updating tree in README.md...")

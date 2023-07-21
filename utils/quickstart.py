@@ -61,7 +61,7 @@ if __name__ == "__main__":
             lines = f.readlines()
         with open("README.md", "w") as f:
             for line in lines:
-                f.write(line.replace("rpytemplate", project_name).replace("rpy-template", dir_name))
+                f.write(line.replace("rpytemplate", project_name).replace("RPY", dir_name))
         print("done.")
     
     print("Project {} created! Please run 'poetry run python utils/update.py' to finish installation.".format(project_name))
