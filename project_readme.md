@@ -34,8 +34,8 @@ poetry run jupyter notebook
 The project is organized as follows:
 
 ```
-<rpy-template>/
-├── <rpytemplate>/ - Python package for common code
+rpy-template/
+├── rpytemplate/ - Python package for common code
 │   ├── __init__.py
 │   ├── rdp_client.py - for Rishika's Data Protection (RDP) Standard
 │   └── ...
