@@ -115,6 +115,31 @@ if __name__ == "__main__":
     # remove pyproject.toml.tmp
     os.system("rm pyproject.toml.tmp")
 
+    # download latest .gitignore into package folder as a temporary file
+    gitignore_web = "https://raw.githubusercontent.com/neurorishika/rpy-template/main/.gitignore"
+
+    print("Downloading latest .gitignore into package folder...")
+    os.system("curl {} -o .gitignore.tmp".format(gitignore_web))
+    print("Download complete.")
+
+    # go through .gitignore.tmp and:
+    # 1. find all files that are in the template but not in the current package
+    # 2. add those files to the current package
+
+    with open(".gitignore.tmp", "r") as f:
+        lines_tmp = f.readlines()
+
+    with open(".gitignore", "r") as f:
+        lines = f.readlines()
+    
+    for line in lines_tmp:
+        if line not in lines:
+            with open(".gitignore", "a") as f:
+                f.write(line)
+
+    # remove .gitignore.tmp
+    os.system("rm .gitignore.tmp")
+
     # go through the entire repo and check if any files are more than 100MB
     # if so, inform the user and add them to .gitignore
 
@@ -159,7 +184,26 @@ if __name__ == "__main__":
                 f.write("Latest Build Date: {}\n".format(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
             else:
                 f.write(line)
+    
+    # replace the tree in README.md with the latest tree
+    print("Updating tree in README.md...")
 
+    # get the latest tree using git
+    tree = os.system('git ls-tree --full-name --name-only -t -r HEAD | sed -e "s/[^-][^\/]*\//   |/g" -e "s/|\([^ ]\)/|-- \1/"')
+    # replace the tree in README.md
+    with open("README.md", "r") as f:
+        lines = f.readlines()
+    with open("README.md", "w") as f:
+        for line in lines:
+            if line.startswith("The project is organized as follows:"):
+                f.write("The project is organized as follows:\n")
+                f.write("```\n")
+                f.write(tree)
+                f.write("```\n")
+                break
+            else:
+                f.write(line)
+    
     # run poetry lock
     print("Running poetry lock...")
     call("poetry lock", shell=True)
