@@ -7,6 +7,7 @@ if __name__ == "__main__":
 
     # get the current directory name to use as the project name
     project_name = os.path.basename(os.getcwd()).lower()
+    dir_name = os.path.basename(os.getcwd())
 
     # verify that the project name is valid
     if not project_name.isidentifier():
@@ -51,7 +52,18 @@ if __name__ == "__main__":
     with open("directory.path", "w") as f:
         f.write(os.getcwd())
     print("done.")
+
+    if os.path.exists("project_readme.md"):
+        # go through project_readme.md and replace all instances of rpytemplate with the project name
+        # and rpy-template with the directory name, and save it as README.md and finally delete project_readme.md
+        print("Replacing all instances of rpytemplate with the project name in project_readme.md...",end="")
+        with open("project_readme.md", "r") as f:
+            lines = f.readlines()
+        with open("README.md", "w") as f:
+            for line in lines:
+                f.write(line.replace("rpytemplate", project_name).replace("rpy-template", dir_name))
+        print("done.")
     
-    print("Project {} created! Please run 'poetry run python utils/build.py' to finish installation.".format(project_name))
+    print("Project {} created! Please run 'poetry run python utils/update.py' to finish installation.".format(project_name))
     
 

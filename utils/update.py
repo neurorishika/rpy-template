@@ -114,6 +114,40 @@ if __name__ == "__main__":
     # remove pyproject.toml.tmp
     os.system("rm pyproject.toml.tmp")
 
+    # go through the entire repo and check if any files are more than 100MB
+    # if so, inform the user and add them to .gitignore
+
+    print("Checking for files larger than 100MB...")
+    files = []
+    for root, dirs, filenames in os.walk("."):
+        for filename in filenames:
+            files.append(os.path.join(root,filename))
+    large_files = []
+    for file in files:
+        if os.path.getsize(file) > 100000000:
+            large_files.append(file)
+
+    # remove previous large files from .gitignore
+    with open(".gitignore", "r") as f:
+        lines = f.readlines()
+    with open(".gitignore", "w") as f:
+        for line in lines:
+            if line.endswith("# LARGE FILE\n"):
+                continue
+            else:
+                f.write(line)
+    
+    # add new large files to .gitignore
+    if len(large_files) > 0:
+        print("The following files are larger than 100MB. Adding them to .gitignore...")
+        for file in large_files:
+            print(file)
+            with open(".gitignore", "a") as f:
+                f.write(file + " # LARGE FILE\n")
+        print("Files added to .gitignore.")
+    else:
+        print("No files larger than 100MB found.")
+
     # run poetry lock
     print("Running poetry lock...")
     call("poetry lock", shell=True)

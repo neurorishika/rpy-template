@@ -81,6 +81,7 @@ The project is organized as follows:
 ├── utils/ - utilities directory for useful scripts (tracked by git)
 │   ├── build.py - build package and setup __init__.py for package with lazy imports
 │   ├── quickstart.py - quickstart script to setup project
+│   ├── update.py - update template and build package
 │   └── ...
 ├── scripts/ - scripts directory (tracked by git)
 │   ├── .gitkeep
@@ -92,6 +93,7 @@ The project is organized as follows:
 ├── director.path - file containing path to the repo directory
 ├── poetry.lock - poetry lock file
 ├── pyproject.toml - poetry project file
+├── poetry.toml - poetry configuration file
 └── README.md - README file
 ```
 
