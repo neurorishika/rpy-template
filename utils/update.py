@@ -160,8 +160,9 @@ if __name__ == "__main__":
         lines = f.readlines()
     
     for line in lines_tmp:
-        if line not in lines:
+        if line not in lines and line != "\n":
             with open(".gitignore", "a") as f:
+                f.write('\n')
                 f.write(line)
 
     # remove .gitignore.tmp
