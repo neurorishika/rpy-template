@@ -1,5 +1,5 @@
 import os
-from subprocess import check_output,PIPE,call
+from subprocess import check_output,call
 import datetime
 
 if __name__ == "__main__":
