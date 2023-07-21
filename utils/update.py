@@ -227,27 +227,28 @@ if __name__ == "__main__":
     # replace the tree in README.md with the latest tree
     print("Updating tree in README.md...")
 
-    # add tree alias to git
-    os.system("""git config --global alias.tree '! git ls-tree --full-name --name-only -t -r HEAD | sed -e "s/[^-][^\/]*\//   |/g" -e "s/|\([^ ]\)/|-- \1/"'""")
-
     # get the latest tree using git and save it to a variable using os.system and output redirection
-    tree_command = ['git', 'tree']
-    tree = check_output(tree_command).decode('utf-8')
-    print(tree)
+    try:
+        tree_command = ['git', 'tree']
+        tree = check_output(tree_command).decode('utf-8')
+        print(tree)
 
-    # replace the tree in README.md
-    with open("README.md", "r") as f:
-        lines = f.readlines()
-    with open("README.md", "w") as f:
-        for line in lines:
-            if line.startswith("The project is organized as follows:"):
-                f.write("The project is organized as follows:\n")
-                f.write("```\n")
-                f.write(tree)
-                f.write("```\n")
-                break
-            else:
-                f.write(line)
+        # replace the tree in README.md
+        with open("README.md", "r") as f:
+            lines = f.readlines()
+        with open("README.md", "w") as f:
+            for line in lines:
+                if line.startswith("The project is organized as follows:"):
+                    f.write("The project is organized as follows:\n")
+                    f.write("```\n")
+                    f.write(tree)
+                    f.write("```\n")
+                    break
+                else:
+                    f.write(line)
+    except:
+        print("Error: Please install git, and add the alias 'tree' provided in the README.md")
+        exit(-1)
 
     print("README.md updated.")
 

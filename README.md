@@ -2,10 +2,10 @@
 
 This is a [Poetry](https://python-poetry.org/)-enabled template for Python projects for use by [Rishika Mohanta](https://neurorishika.github.io).
 
-Make sure in-project virtual environments are enabled for poetry by running the following command:
+Also you need to setup a git alias for tree generation by running the following command on the terminal:
 
 ```
-poetry config virtualenvs.in-project true
+git config --global alias.tree '! git ls-tree --full-name --name-only -t -r HEAD | sed -e "s/[^-][^\/]*\//   |/g" -e "s/|\([^ ]\)/|-- \1/"'
 ```
 
 Expected IDE: [Visual Studio Code](https://code.visualstudio.com/)
