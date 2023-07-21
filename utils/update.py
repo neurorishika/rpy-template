@@ -190,6 +190,9 @@ if __name__ == "__main__":
 
     # get the latest tree using git
     tree = os.system('git ls-tree --full-name --name-only -t -r HEAD | sed -e "s/[^-][^\/]*\//   |/g" -e "s/|\([^ ]\)/|-- \1/"')
+    # replace single '\' with '/'
+    tree = tree.replace('\\', '/')
+
     # replace the tree in README.md
     with open("README.md", "r") as f:
         lines = f.readlines()
