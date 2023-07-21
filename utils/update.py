@@ -1,5 +1,6 @@
 import os
 from subprocess import call
+import datetime
 
 if __name__ == "__main__":
     
@@ -147,6 +148,17 @@ if __name__ == "__main__":
         print("Files added to .gitignore.")
     else:
         print("No files larger than 100MB found.")
+
+    # go through README.md and update the latest build date
+    print("Updating README.md...")
+    with open("README.md", "r") as f:
+        lines = f.readlines()
+    with open("README.md", "w") as f:
+        for line in lines:
+            if line.startswith("Latest Build Date:"):
+                f.write("Latest Build Date: {}\n".format(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+            else:
+                f.write(line)
 
     # run poetry lock
     print("Running poetry lock...")
