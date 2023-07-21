@@ -181,7 +181,7 @@ if __name__ == "__main__":
     with open("README.md", "w") as f:
         for line in lines:
             if line.startswith("Latest Build Date:"):
-                f.write("Latest Build Date: {}\n".format(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+                f.write("Latest Build Date: {}\n".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
             else:
                 f.write(line)
     
