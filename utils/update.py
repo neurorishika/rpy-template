@@ -194,6 +194,8 @@ if __name__ == "__main__":
     # get the latest tree using git and save it to a variable using os.system and output redirection
     tree_command = ['git', 'tree']
     tree = run(tree_command, stdout=PIPE).stdout.decode('utf-8')
+    # replace all escaped characters
+    tree = tree.replace("\\", "")
     print(tree)
 
     # replace the tree in README.md
