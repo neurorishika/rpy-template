@@ -1,5 +1,5 @@
 import os
-from subprocess import call
+from subprocess import run,PIPE
 import datetime
 
 if __name__ == "__main__":
@@ -188,10 +188,10 @@ if __name__ == "__main__":
     # replace the tree in README.md with the latest tree
     print("Updating tree in README.md...")
 
-    # get the latest tree using git
-    tree = os.system('git ls-tree --full-name --name-only -t -r HEAD | sed -e "s/[^-][^\/]*\//   |/g" -e "s/|\([^ ]\)/|-- \1/"')
-    # replace single '\' with '/'
-    tree = tree.replace('\\', '/')
+    # get the latest tree using git and save it to a variable using os.system and output redirection
+    tree_command = ['git', 'ls-tree', '--full-name', '--name-only', '-t', '-r', 'HEAD', '|', 'sed', '-e', '"s/[^-][^\/]*\//   |/g"', '-e', '"s/|\([^ ]\)/|-- \1/"']
+    tree = run(tree_command, stdout=PIPE).stdout.decode('utf-8')
+    print(tree)
 
     # replace the tree in README.md
     with open("README.md", "r") as f:
