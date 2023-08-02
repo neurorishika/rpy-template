@@ -156,8 +156,8 @@ temp/
 .archive/
 # key files anywhere in the project directory and subfolders
 **/*.key
-# data files anywhere in the project directory and subfolders
-**/data/*
+# data folders anywhere in the project directory and subfolders
+**/data/*/
 # unprotected zip files anywhere in the project directory and subfolders
 **/*.zip
 # directorypaths
