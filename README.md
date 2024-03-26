@@ -35,8 +35,8 @@ Create a new project using this template on GitHub and clone it locally. Then, r
 ```
 cd <project directory>
 python utils/quickstart.py
-python utils/update.py
-poetry utils/build.py
+poetry run python utils/update.py
+poetry run python utils/build.py
 ```
 
 ## Update & Build Packages and Setup __init__.py for package with lazy imports
